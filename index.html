@@ -21,57 +21,45 @@
         .card { background: white; padding: 30px; border-radius: 15px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border: 1px solid #E8EEE6;}
         h2 { color: var(--hb-green); margin-top: 0; border-left: 5px solid var(--hb-green); padding-left: 15px; font-size: 1.3rem;}
 
-        /* --- Formulieren --- */
+        /* Formulieren & Grid */
         .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
         .form-group { display: flex; flex-direction: column; margin-bottom: 10px; }
         label { font-weight: 600; font-size: 0.85rem; margin-bottom: 5px; color: #555; }
         input[type="text"], input[type="date"], input[type="email"], textarea { padding: 10px; border: 1px solid #E0E0E0; border-radius: 8px; font-family: inherit; width: 100%; box-sizing: border-box; }
         input:focus, textarea:focus { border-color: var(--hb-green); outline: none; }
 
-        /* --- Checklist --- */
+        /* Checklist Table */
         .check-table { width: 100%; border-collapse: collapse; }
         .col-option { width: 80px; text-align: center; font-weight: bold; color: #888; font-size: 0.8rem; }
         .check-table td { padding: 12px 5px; border-bottom: 1px solid #F5F5F5; }
         .check-table input[type="radio"] { transform: scale(1.2); cursor: pointer; }
 
-        /* --- Scorebalk --- */
+        /* Score & Analyse */
         .score-box { margin-top: 25px; background: #F9F9F9; padding: 20px; border-radius: 10px; }
         .progress-bg { background: #E0E0E0; height: 14px; border-radius: 7px; overflow: hidden; margin-top: 10px; }
         #score-fill { background-color: #e74c3c; height: 100%; width: 0%; transition: 0.4s; }
-
-        /* --- Analyse --- */
         .symp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
         .symp-item { font-size: 0.8rem; display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .symp-item input[type="checkbox"] { transform: scale(1.1); }
         .analysis-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px; }
         .analysis-box { padding: 15px; border-radius: 10px; background: #fdfdfd; border: 1px solid #eee; font-size: 0.85rem; }
         .highlight-box { border-left: 5px solid var(--hb-green); background: #f4f9f0; }
         .warning-box { margin-top: 15px; padding: 10px; background: #ffeaea; border-left: 4px solid #e74c3c; color: #c0392b; font-size: 0.8rem; border-radius: 5px;}
 
-        /* =========================================
-           MOBILE RESPONSIVE DESIGN (SMARTPHONES)
-           ========================================= */
+        /* Mobiele optimalisatie */
         @media (max-width: 768px) {
             body { flex-direction: column; }
-            #sidebar { position: static; width: 100%; height: auto; box-shadow: none; order: 2; border-top: 5px solid var(--hb-green); }
+            #sidebar { position: static; width: 100%; height: auto; order: 2; border-top: 5px solid var(--hb-green); }
             #main-wrapper { margin-right: 0; padding: 15px; width: 100%; order: 1; }
-            .card { padding: 20px; margin-bottom: 15px; }
-            .col-option { width: 50px; }
-            .analysis-container { grid-template-columns: 1fr; gap: 10px; }
+            .analysis-container { grid-template-columns: 1fr; }
         }
 
-        /* =========================================
-           PRINT & PDF FIXES
-           ========================================= */
+        /* Print/PDF Fixes */
         @media print { 
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            body { background: white; }
             #sidebar { display: none; } 
             #main-wrapper { margin-right: 0; width: 100%; padding: 0; } 
-            .card { box-shadow: none; border: 1px solid #ddd; padding: 20px; page-break-inside: avoid; break-inside: avoid; } 
+            .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; break-inside: avoid; }
             tr, .symp-item, .form-group { page-break-inside: avoid; break-inside: avoid; }
-            input[type="checkbox"], input[type="radio"] { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-            .progress-bg { border: 1px solid #ccc; }
         }
     </style>
 </head>
@@ -171,6 +159,9 @@
     <button class="info-btn" onclick="window.open('Gewrichten.pdf')">Gewrichten</button>
     <button class="info-btn" onclick="window.open('Suikerspiegel.pdf')">Suikerspiegel</button>
     <button class="info-btn" onclick="window.open('Gezonde-tussendoortjes.pdf')">Gezonde tussendoortjes</button>
+    <button class="info-btn" onclick="window.open('Spijsvertering.pdf')">Spijsvertering</button>
+    <button class="info-btn" onclick="window.open('Eiwit-vergelijking.pdf')">Bouwstenen (Huis)</button>
+    <button class="info-btn" onclick="window.open('Ons-brein.pdf')">Ons brein</button>
     <button class="info-btn" onclick="window.open('Ontbijtopties.jpg')">Ontbijtopties</button>
     <button class="info-btn" onclick="window.open('Ontbijt-vs-shake.jpg')">Ontbijt vs shake</button>
     <button class="info-btn" onclick="window.open('Allergenen.pdf')">Allergenen</button>
@@ -190,38 +181,22 @@
         {q: "Ik drink minimaal 1,5L water per dag", val: "JA"}, {q: "Ik drink dagelijks alcohol", val: "NEE"}, {q: "Ik rook", val: "NEE"}
     ];
 
-    // Hier is de VOLLEDIG NIEUWE lijst met correcte voedingstekorten/connecties per symptoom
     const symptoms = [
-        {t: "Energiegebrek", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]}, 
-        {t: "Regelmatig verkouden", f: ["Vetten", "Eiwitten", "Water"]},
-        {t: "Hoofdpijn / Migraine", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]}, 
-        {t: "Spierkrampen", f: ["Vetten", "Eiwitten", "Water"]},
-        {t: "Spierpijn", f: ["Vetten", "Eiwitten", "Water"]}, 
-        {t: "Vocht vasthouden", f: ["Vezels", "Water"]},
-        {t: "Angst / Paniek", f: ["Stress", "Vezels", "Eiwitten", "Water"]}, 
-        {t: "Brandend maagzuur", f: ["Vezels", "Eiwitten", "Water"]},
-        {t: "Stoelgang problemen", f: ["Vezels", "Vetten", "Water"]}, 
-        {t: "Concentratieverlies", f: ["Stress", "Vetten", "Eiwitten", "Water"]},
-        {t: "Vergeetachtigheid", f: ["Stress", "Vetten", "Eiwitten", "Water"]}, 
-        {t: "Onzeker zijn", f: ["Vezels", "Vetten", "Water"]},
-        {t: "Minder aankunnen", f: ["Vezels", "Vetten", "Eiwitten", "Water"]}, 
-        {t: "Negatieve gedachten", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]},
-        {t: "Snel geïrriteerd", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]}, 
-        {t: "Zin in zoet", f: ["Stress", "Vezels", "Eiwitten", "Water"]},
-        {t: "Ontstekingen", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]}, 
-        {t: "Gewrichtspijn", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]},
-        {t: "Hartkloppingen", f: ["Stress", "Vetten", "Eiwitten", "Water"]}, 
-        {t: "Droge huid / Acné", f: ["Stress", "Vetten", "Eiwitten", "Water"]},
-        {t: "Trage wondgenezing", f: ["Stress", "Vezels"]}, 
-        {t: "Haarverlies", f: ["Vezels"]},
-        {t: "Wazig zicht", f: ["Stress", "Vezels", "Vetten", "Water"]}, 
-        {t: "Broze nagels", f: ["Vezels"]},
-        {t: "Schimmelinfectie", f: ["Stress", "Vezels", "Water"]}, 
-        {t: "Allergieën", f: ["Vezels"]},
-        {t: "Bloedend tandvlees", f: ["Eiwitten"]}, 
-        {t: "Koortsblaasjes", f: ["Weerstand"]},
-        {t: "Veel dorst/plassen", f: ["Stress", "Vezels", "Eiwitten"]}, 
-        {t: "Slechte slaper", f: ["Stress", "Vezels", "Water"]}
+        {t: "Energiegebrek", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]}, {t: "Regelmatig verkouden", f: ["Vetten", "Eiwitten", "Water"]},
+        {t: "Hoofdpijn / Migraine", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]}, {t: "Spierkrampen", f: ["Vetten", "Eiwitten", "Water"]},
+        {t: "Spierpijn", f: ["Vetten", "Eiwitten", "Water"]}, {t: "Vocht vasthouden", f: ["Vezels", "Water"]},
+        {t: "Angst / Paniek", f: ["Stress", "Vezels", "Eiwitten", "Water"]}, {t: "Brandend maagzuur", f: ["Vezels", "Eiwitten", "Water"]},
+        {t: "Stoelgang problemen", f: ["Vezels", "Vetten", "Water"]}, {t: "Concentratieverlies", f: ["Stress", "Vetten", "Eiwitten", "Water"]},
+        {t: "Vergeetachtigheid", f: ["Stress", "Vetten", "Eiwitten", "Water"]}, {t: "Onzeker zijn", f: ["Vezels", "Vetten", "Water"]},
+        {t: "Minder aankunnen", f: ["Vezels", "Vetten", "Eiwitten", "Water"]}, {t: "Negatieve gedachten", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]},
+        {t: "Snel geïrriteerd", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]}, {t: "Zin in zoet", f: ["Stress", "Vezels", "Eiwitten", "Water"]},
+        {t: "Ontstekingen", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]}, {t: "Gewrichtspijn", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]},
+        {t: "Hartkloppingen", f: ["Stress", "Vetten", "Eiwitten", "Water"]}, {t: "Droge huid / Acné", f: ["Stress", "Vetten", "Eiwitten", "Water"]},
+        {t: "Trage wondgenezing", f: ["Stress", "Vezels"]}, {t: "Haarverlies", f: ["Vezels"]},
+        {t: "Wazig zicht", f: ["Stress", "Vezels", "Vetten", "Water"]}, {t: "Broze nagels", f: ["Vezels"]},
+        {t: "Schimmelinfectie", f: ["Stress", "Vezels", "Water"]}, {t: "Allergieën", f: ["Vezels"]},
+        {t: "Bloedend tandvlees", f: ["Eiwitten"]}, {t: "Koortsblaasjes", f: ["Weerstand"]},
+        {t: "Veel dorst/plassen", f: ["Stress", "Vezels", "Eiwitten"]}, {t: "Slechte slaper", f: ["Stress", "Vezels", "Water"]}
     ];
 
     function init() {
@@ -256,7 +231,6 @@
         document.getElementById('symp-details').innerHTML = names.join('<br>') || "Klik op symptomen...";
         const sorted = Object.entries(tallies).sort((a,b) => b[1]-a[1]);
         let resHTML = sorted.map(r => `<div style="padding:2px 0;">${r[0]}: ${r[1]}x</div>`).join('') || "...";
-        
         if (checked.length >= 5) {
             resHTML += `<div class="warning-box"><strong>Let op:</strong> Bij 5 of meer symptomen is er tevens een algemeen tekort aan vitaminen!</div>`;
         }
