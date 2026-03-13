@@ -9,51 +9,77 @@
         :root { --hb-green: #7AC142; --sidebar-dark: #2C3E50; --bg-light: #F8FAF7; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-light); margin: 0; display: flex; min-height: 100vh; }
         
-        #sidebar { width: 280px; background: var(--sidebar-dark); color: white; padding: 30px 20px; position: fixed; right: 0; height: 100vh; overflow-y: auto; z-index: 100; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+        /* --- Sidebar --- */
+        #sidebar { width: 280px; background: var(--sidebar-dark); color: white; padding: 30px 20px; position: fixed; right: 0; height: 100vh; overflow-y: auto; z-index: 100; box-shadow: -5px 0 15px rgba(0,0,0,0.1); box-sizing: border-box; }
         #sidebar h3 { border-bottom: 2px solid var(--hb-green); padding-bottom: 10px; margin-bottom: 20px; }
-        .info-btn { width: 100%; padding: 12px; margin-bottom: 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; cursor: pointer; text-align: left; font-family: inherit;}
+        .info-btn { width: 100%; padding: 12px; margin-bottom: 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; cursor: pointer; text-align: left; font-family: inherit; transition: 0.3s;}
+        .info-btn:hover { background: rgba(255,255,255,0.2); border-color: var(--hb-green); }
         
+        /* --- Main Content --- */
         #main-wrapper { flex: 1; margin-right: 280px; padding: 40px; max-width: 1100px; box-sizing: border-box; }
+        .header-logo { width: 100%; max-width: 300px; margin-bottom: 20px; display: block; }
         .card { background: white; padding: 30px; border-radius: 15px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border: 1px solid #E8EEE6;}
         h2 { color: var(--hb-green); margin-top: 0; border-left: 5px solid var(--hb-green); padding-left: 15px; font-size: 1.3rem;}
 
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        /* --- Formulieren --- */
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
         .form-group { display: flex; flex-direction: column; margin-bottom: 10px; }
         label { font-weight: 600; font-size: 0.85rem; margin-bottom: 5px; color: #555; }
-        input, textarea { padding: 10px; border: 1px solid #E0E0E0; border-radius: 8px; font-family: inherit; }
+        input[type="text"], input[type="date"], input[type="email"], textarea { padding: 10px; border: 1px solid #E0E0E0; border-radius: 8px; font-family: inherit; width: 100%; box-sizing: border-box; }
         input:focus, textarea:focus { border-color: var(--hb-green); outline: none; }
 
-        /* Sectie 2: Focus */
-        .focus-grid { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
-        .focus-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
-
-        /* Sectie 3: Checklist */
+        /* --- Checklist --- */
         .check-table { width: 100%; border-collapse: collapse; }
-        .check-table th { padding-bottom: 10px; }
         .col-option { width: 80px; text-align: center; font-weight: bold; color: #888; font-size: 0.8rem; }
         .check-table td { padding: 12px 5px; border-bottom: 1px solid #F5F5F5; }
         .check-table input[type="radio"] { transform: scale(1.2); cursor: pointer; }
 
-        /* Scorebalk met transitie voor breedte én kleur */
+        /* --- Scorebalk --- */
         .score-box { margin-top: 25px; background: #F9F9F9; padding: 20px; border-radius: 10px; }
         .progress-bg { background: #E0E0E0; height: 14px; border-radius: 7px; overflow: hidden; margin-top: 10px; }
-        #score-fill { background-color: #e74c3c; height: 100%; width: 0%; transition: width 0.4s ease, background-color 0.4s ease; }
+        #score-fill { background-color: #e74c3c; height: 100%; width: 0%; transition: 0.4s; }
 
-        /* Sectie 5: Analyse */
-        .symp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px; }
-        .symp-item { font-size: 0.8rem; display: flex; align-items: center; gap: 8px; }
-        
+        /* --- Analyse --- */
+        .symp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+        .symp-item { font-size: 0.8rem; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .symp-item input[type="checkbox"] { transform: scale(1.1); }
         .analysis-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px; }
         .analysis-box { padding: 15px; border-radius: 10px; background: #fdfdfd; border: 1px solid #eee; font-size: 0.85rem; }
         .highlight-box { border-left: 5px solid var(--hb-green); background: #f4f9f0; }
-        .warning-box { margin-top: 15px; padding: 10px; background: #ffeaea; border-left: 4px solid #e74c3c; color: #c0392b; font-size: 0.8rem; border-radius: 4px; }
+        .warning-box { margin-top: 15px; padding: 10px; background: #ffeaea; border-left: 4px solid #e74c3c; color: #c0392b; font-size: 0.8rem; border-radius: 5px;}
 
-        @media print { #sidebar { display: none; } #main-wrapper { margin-right: 0; width: 100%; padding: 0; } .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid;} }
+        /* =========================================
+           MOBILE RESPONSIVE DESIGN (SMARTPHONES)
+           ========================================= */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            #sidebar { position: static; width: 100%; height: auto; box-shadow: none; order: 2; border-top: 5px solid var(--hb-green); }
+            #main-wrapper { margin-right: 0; padding: 15px; width: 100%; order: 1; }
+            .card { padding: 20px; margin-bottom: 15px; }
+            .col-option { width: 50px; }
+            .analysis-container { grid-template-columns: 1fr; gap: 10px; }
+        }
+
+        /* =========================================
+           PRINT & PDF FIXES
+           ========================================= */
+        @media print { 
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            body { background: white; }
+            #sidebar { display: none; } 
+            #main-wrapper { margin-right: 0; width: 100%; padding: 0; } 
+            .card { box-shadow: none; border: 1px solid #ddd; padding: 20px; page-break-inside: avoid; break-inside: avoid; } 
+            tr, .symp-item, .form-group { page-break-inside: avoid; break-inside: avoid; }
+            input[type="checkbox"], input[type="radio"] { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+            .progress-bg { border: 1px solid #ccc; }
+        }
     </style>
 </head>
 <body>
 
 <div id="main-wrapper">
+    <img src="logo.png" alt="Logo" class="header-logo" onerror="this.style.display='none'">
+
     <div class="card">
         <h2>1. Algemene Gegevens</h2>
         <div class="form-grid">
@@ -68,31 +94,26 @@
 
     <div class="card">
         <h2>2. Verwachtingen & Focus</h2>
-        <div class="focus-grid">
-            <label class="focus-item"><input type="checkbox"> Energie</label>
-            <label class="focus-item"><input type="checkbox"> Gewicht</label>
-            <label class="focus-item"><input type="checkbox"> Sport</label>
-            <label class="focus-item"><input type="checkbox"> Slaap</label>
-            <label class="focus-item"><input type="checkbox"> Immuniteit</label>
-            <label class="focus-item"><input type="checkbox"> Spijsvertering</label>
-            <label class="focus-item"><input type="checkbox"> Gewrichten</label>
-            <label class="focus-item"><input type="checkbox"> Huid</label>
-            <label class="focus-item"><input type="checkbox"> Concentratie</label>
-            <label class="focus-item"><input type="checkbox"> Hart/Bloedvaten</label>
-            <label class="focus-item"><input type="checkbox"> Ogen/Zicht</label>
+        <div class="form-grid" style="display:flex; flex-wrap:wrap; gap:15px;">
+            <label class="symp-item"><input type="checkbox"> Energie</label>
+            <label class="symp-item"><input type="checkbox"> Gewicht</label>
+            <label class="symp-item"><input type="checkbox"> Sport</label>
+            <label class="symp-item"><input type="checkbox"> Slaap</label>
+            <label class="symp-item"><input type="checkbox"> Immuniteit</label>
+            <label class="symp-item"><input type="checkbox"> Spijsvertering</label>
+            <label class="symp-item"><input type="checkbox"> Gewrichten</label>
+            <label class="symp-item"><input type="checkbox"> Huid</label>
+            <label class="symp-item"><input type="checkbox"> Concentratie</label>
+            <label class="symp-item"><input type="checkbox"> Hart/Bloedvaten</label>
+            <label class="symp-item"><input type="checkbox"> Ogen/Zicht</label>
         </div>
-        <div class="form-group" style="margin-top: 10px;">
-            <label>Waarom is dit doel belangrijk voor je?</label>
-            <textarea rows="2"></textarea>
-        </div>
+        <div class="form-group" style="margin-top:10px;"><label>Belang van dit doel?</label><textarea rows="2"></textarea></div>
     </div>
 
     <div class="card">
         <h2>3. Checklist Huidige Levensstijl</h2>
         <table class="check-table">
-            <thead>
-                <tr><th align="left" style="color:#888; font-size:0.8rem;">Omschrijving / Vraagstelling</th><th class="col-option">NEE</th><th class="col-option">JA</th></tr>
-            </thead>
+            <thead><tr><th align="left" style="color:#888; font-size:0.8rem;">Vraagstelling</th><th class="col-option">NEE</th><th class="col-option">JA</th></tr></thead>
             <tbody id="check-list"></tbody>
         </table>
         <div class="score-box">
@@ -102,44 +123,39 @@
     </div>
 
     <div class="card">
-        <h2>4. Dagelijkse Eetgewoonten & Hydratatie</h2>
+        <h2>4. Eetgewoonten & Hydratatie</h2>
         <div class="form-grid">
             <div class="form-group"><label>Ontbijt</label><textarea rows="2"></textarea></div>
             <div class="form-group"><label>Middag</label><textarea rows="2"></textarea></div>
             <div class="form-group"><label>Avond</label><textarea rows="2"></textarea></div>
             <div class="form-group"><label>Tussendoortjes</label><textarea rows="2"></textarea></div>
-        </div>
-        <div class="form-grid" style="margin-top:15px;">
             <div class="form-group"><label>Hoeveel water drink je per dag?</label><input type="text"></div>
-            <div class="form-group"><label>Andere dranken (koffie, frisdrank...)?</label><input type="text"></div>
+            <div class="form-group"><label>Andere dranken (koffie, fris...)</label><input type="text"></div>
         </div>
     </div>
 
     <div class="card">
         <h2>5. Analyse Voedingstekorten</h2>
         <div class="symp-grid" id="symp-list"></div>
-        
         <div class="analysis-container">
             <div class="analysis-box">
-                <strong style="color:var(--hb-green)">Aangevinkte symptomen:</strong>
+                <strong style="color:var(--hb-green)">Symptoom & Vermoedelijk tekort:</strong>
                 <div id="symp-details" style="margin-top:10px; line-height:1.6; color:#444;">Klik op symptomen...</div>
             </div>
             <div class="analysis-box highlight-box">
-                <strong>Meest voorkomende tekorten:</strong>
-                <div id="tally-results" style="margin-top:10px; font-weight:bold; color:#333;">...</div>
+                <strong>Optelling tekorten:</strong>
+                <div id="tally-results" style="margin-top:10px; font-weight:bold;">...</div>
             </div>
         </div>
     </div>
 
     <div class="card">
-        <h2>6. Slaap, Stress & Beweging</h2>
+        <h2>6. Slaap, Stress & Sport</h2>
         <div class="form-grid">
-            <div class="form-group"><label>Slaapuren (Wanneer slapen / opstaan?)</label><input type="text"></div>
-            <div class="form-group"><label>Slaapkwaliteit vs 5 jaar geleden?</label><input type="text"></div>
-            <div class="form-group"><label>Type werk (Stress, zittend, posten?)</label><input type="text"></div>
-            <div class="form-group"><label>Stress? (Wat is de reden hiervan?)</label><input type="text"></div>
-        </div>
-        <div class="form-grid" style="margin-top: 15px;">
+            <div class="form-group"><label>Slaapuren (Wanneer?)</label><input type="text"></div>
+            <div class="form-group"><label>Kwaliteit vs 5 jaar geleden</label><input type="text"></div>
+            <div class="form-group"><label>Type werk / Stress</label><input type="text"></div>
+            <div class="form-group"><label>Stress reden</label><input type="text"></div>
             <div class="form-group"><label>Sport: Kracht</label><input type="text"></div>
             <div class="form-group"><label>Sport: Uithouding</label><input type="text"></div>
             <div class="form-group"><label>Sport: Flexibiliteit</label><input type="text"></div>
@@ -151,7 +167,7 @@
     <h3>Info muur</h3>
     <button class="info-btn" onclick="window.open('Visceraal-vet.pdf')">Visceraal vet</button>
     <button class="info-btn" onclick="window.open('Vetpercentage.pdf')">Vetpercentage</button>
-    <button class="info-btn" onclick="window.open('Centimeters-kilos.pdf')">Centimeters of kilo's</button>
+    <button class="info-btn" onclick="window.open('centimeters.pdf')">Centimeters of kilo's</button>
     <button class="info-btn" onclick="window.open('Gewrichten.pdf')">Gewrichten</button>
     <button class="info-btn" onclick="window.open('Suikerspiegel.pdf')">Suikerspiegel</button>
     <button class="info-btn" onclick="window.open('Gezonde-tussendoortjes.pdf')">Gezonde tussendoortjes</button>
@@ -164,31 +180,21 @@
 </div>
 
 <script>
-    // 15 Vragen met correcte JA/NEE logica
     const questions = [
-        {q: "Ik ben uitgeslapen als ik 's morgens opsta", val: "JA"}, 
-        {q: "Ik start elke ochtend met een volwaardig ontbijt", val: "JA"},
-        {q: "Ik heb tijdens de dag last van energiedips", val: "NEE"}, 
-        {q: "Ik heb geregeld honger of snoepzin", val: "NEE"},
-        {q: "Ik drink meer dan 2 kopjes koffie per dag", val: "NEE"}, 
-        {q: "Ik neem tijd voor een evenwichtige maaltijd", val: "JA"},
-        {q: "Ik drink dagelijks frisdrank", val: "NEE"}, 
-        {q: "Ik eet elke dag minstens 2 stuks fruit", val: "JA"},
-        {q: "Ik eet elke dag minimaal 300g groenten", val: "JA"}, 
-        {q: "Ik beweeg dagelijks minimaal 30 minuten", val: "JA"},
-        {q: "Ik heb momenteel veel stress", val: "NEE"}, 
-        {q: "Mijn gewicht is perfect onder controle", val: "JA"},
-        {q: "Ik drink minimaal 1,5L water per dag", val: "JA"}, 
-        {q: "Ik drink dagelijks alcohol", val: "NEE"}, 
-        {q: "Ik rook meer dan 2 sigaretten per dag", val: "NEE"}
+        {q: "Ik ben uitgeslapen als ik 's morgens opsta", val: "JA"}, {q: "Ik start elke ochtend met een volwaardig ontbijt", val: "JA"},
+        {q: "Ik heb tijdens de dag last van energiedips", val: "NEE"}, {q: "Ik heb geregeld honger of snoepzin", val: "NEE"},
+        {q: "Ik drink meer dan 2 kopjes koffie per dag", val: "NEE"}, {q: "Ik neem tijd voor een evenwichtige maaltijd", val: "JA"},
+        {q: "Ik drink dagelijks frisdrank", val: "NEE"}, {q: "Ik eet elke dag minstens 2 stuks fruit", val: "JA"},
+        {q: "Ik eet elke dag minimaal 300g groenten", val: "JA"}, {q: "Ik beweeg dagelijks minimaal 30 minuten", val: "JA"},
+        {q: "Ik heb momenteel veel stress", val: "NEE"}, {q: "Mijn gewicht is perfect onder controle", val: "JA"},
+        {q: "Ik drink minimaal 1,5L water per dag", val: "JA"}, {q: "Ik drink dagelijks alcohol", val: "NEE"}, {q: "Ik rook", val: "NEE"}
     ];
 
-    // De 30 Symptomen inclusief hun verborgen tekorten
     const symptoms = [
         {t: "Energiegebrek", f: ["Eiwit","Water"]}, {t: "Regelmatig verkouden", f: ["Weerstand"]},
         {t: "Hoofdpijn / Migraine", f: ["Water","Stress"]}, {t: "Spierkrampen", f: ["Magnesium","Water"]},
         {t: "Spierpijn", f: ["Eiwit"]}, {t: "Vocht vasthouden", f: ["Water"]},
-        {t: "Angst / Paniekaanvallen", f: ["Stress"]}, {t: "Brandend maagzuur", f: ["Vezels"]},
+        {t: "Angst / Paniek", f: ["Stress"]}, {t: "Brandend maagzuur", f: ["Vezels"]},
         {t: "Stoelgang problemen", f: ["Vezels","Water"]}, {t: "Concentratieverlies", f: ["Water","Vetten"]},
         {t: "Vergeetachtigheid", f: ["Vetten"]}, {t: "Onzeker zijn", f: ["Stress"]},
         {t: "Minder aankunnen", f: ["Stress","Eiwit"]}, {t: "Negatieve gedachten", f: ["Stress"]},
@@ -209,7 +215,6 @@
                 <td class="col-option"><input type="radio" name="q${i}" class="${q.val==='NEE'?'pt':''}" onchange="updateScore()"></td>
                 <td class="col-option"><input type="radio" name="q${i}" class="${q.val==='JA'?'pt':''}" onchange="updateScore()"></td></tr>`;
         });
-
         const sl = document.getElementById('symp-list');
         symptoms.forEach((s, i) => {
             sl.innerHTML += `<label class="symp-item"><input type="checkbox" class="sc" data-tags="${s.f.join(',')}" data-name="${s.t}" onchange="updateAnalysis()"> ${i+1}. ${s.t}</label>`;
@@ -219,49 +224,29 @@
     function updateScore() {
         const pts = document.querySelectorAll('input.pt:checked').length;
         document.getElementById('score-num').innerText = pts;
-        
         const fill = document.getElementById('score-fill');
         fill.style.width = (pts/15*100) + "%";
-        
-        // Verander kleur op basis van de score (0-7 rood, 8-11 geel, 12-15 groen)
-        if (pts <= 7) {
-            fill.style.backgroundColor = "#e74c3c"; // Rood
-        } else if (pts <= 11) {
-            fill.style.backgroundColor = "#f1c40f"; // Geel
-        } else {
-            fill.style.backgroundColor = "#7AC142"; // Herbalife Groen
-        }
+        fill.style.backgroundColor = pts <= 7 ? "#e74c3c" : (pts <= 11 ? "#f1c40f" : "#7AC142");
     }
 
     function updateAnalysis() {
         const checked = document.querySelectorAll('.sc:checked');
-        let tallies = {}; 
-        let names = [];
-        
+        let tallies = {}; let names = [];
         checked.forEach(c => {
-            const sympName = c.getAttribute('data-name');
-            const sympTagsArray = c.getAttribute('data-tags').split(',');
-            const sympTagsStr = sympTagsArray.join(', ');
-            
-            // Toon: Symptoom (Tekort, Tekort)
-            names.push(`&bull; ${sympName} <span style="color:#888; font-size:0.75rem;">(${sympTagsStr})</span>`);
-            
-            sympTagsArray.forEach(t => tallies[t] = (tallies[t]||0)+1);
+            const sympTags = c.getAttribute('data-tags').split(',');
+            names.push(`&bull; ${c.getAttribute('data-name')} <span style="color:#888; font-size:0.75rem;">(${sympTags.join(', ')})</span>`);
+            sympTags.forEach(t => tallies[t] = (tallies[t]||0)+1);
         });
-        
         document.getElementById('symp-details').innerHTML = names.join('<br>') || "Klik op symptomen...";
-        
         const sorted = Object.entries(tallies).sort((a,b) => b[1]-a[1]);
-        let rightColHTML = sorted.map(r => `<div style="padding:4px 0;">${r[0]}: ${r[1]}x</div>`).join('') || "...";
+        let resHTML = sorted.map(r => `<div style="padding:2px 0;">${r[0]}: ${r[1]}x</div>`).join('') || "...";
         
-        // Controleer of er 5 of meer symptomen zijn aangevinkt
         if (checked.length >= 5) {
-            rightColHTML += `<div class="warning-box"><strong>Let op:</strong> Bij 5 of meer symptomen is er tevens een algemeen tekort aan vitaminen!</div>`;
+            resHTML += `<div class="warning-box"><strong>Let op:</strong> Bij 5 of meer symptomen is er tevens een algemeen tekort aan vitaminen!</div>`;
         }
-        
-        document.getElementById('tally-results').innerHTML = rightColHTML;
+        document.getElementById('tally-results').innerHTML = resHTML;
     }
-
+    
     init();
 </script>
 </body>
