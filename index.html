@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welzijnsevaluatie</title>
+    <title>Wellness Evaluatie Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root { --hb-green: #7AC142; --sidebar-dark: #2C3E50; --bg-light: #F8FAF7; }
@@ -190,22 +190,38 @@
         {q: "Ik drink minimaal 1,5L water per dag", val: "JA"}, {q: "Ik drink dagelijks alcohol", val: "NEE"}, {q: "Ik rook", val: "NEE"}
     ];
 
+    // Hier is de VOLLEDIG NIEUWE lijst met correcte voedingstekorten/connecties per symptoom
     const symptoms = [
-        {t: "Energiegebrek", f: ["Eiwit","Water"]}, {t: "Regelmatig verkouden", f: ["Weerstand"]},
-        {t: "Hoofdpijn / Migraine", f: ["Water","Stress"]}, {t: "Spierkrampen", f: ["Magnesium","Water"]},
-        {t: "Spierpijn", f: ["Eiwit"]}, {t: "Vocht vasthouden", f: ["Water"]},
-        {t: "Angst / Paniek", f: ["Stress"]}, {t: "Brandend maagzuur", f: ["Vezels"]},
-        {t: "Stoelgang problemen", f: ["Vezels","Water"]}, {t: "Concentratieverlies", f: ["Water","Vetten"]},
-        {t: "Vergeetachtigheid", f: ["Vetten"]}, {t: "Onzeker zijn", f: ["Stress"]},
-        {t: "Minder aankunnen", f: ["Stress","Eiwit"]}, {t: "Negatieve gedachten", f: ["Stress"]},
-        {t: "Snel geïrriteerd", f: ["Stress"]}, {t: "Zin in zoet", f: ["Eiwit","Vezels"]},
-        {t: "Ontstekingen", f: ["Vetten"]}, {t: "Gewrichtspijn", f: ["Vetten","Water"]},
-        {t: "Hartkloppingen", f: ["Stress"]}, {t: "Droge huid / Acné", f: ["Water","Vetten"]},
-        {t: "Trage wondgenezing", f: ["Eiwit"]}, {t: "Haarverlies", f: ["Eiwit"]},
-        {t: "Wazig zicht", f: ["Vitamines"]}, {t: "Broze nagels", f: ["Eiwit"]},
-        {t: "Schimmelinfectie", f: ["Suikerspiegel"]}, {t: "Allergieën", f: ["Darmen"]},
-        {t: "Bloedend tandvlees", f: ["Vitamines"]}, {t: "Koortsblaasjes", f: ["Weerstand"]},
-        {t: "Veel dorst/plassen", f: ["Suikerspiegel"]}, {t: "Slechte slaper", f: ["Stress"]}
+        {t: "Energiegebrek", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]}, 
+        {t: "Regelmatig verkouden", f: ["Vetten", "Eiwitten", "Water"]},
+        {t: "Hoofdpijn / Migraine", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]}, 
+        {t: "Spierkrampen", f: ["Vetten", "Eiwitten", "Water"]},
+        {t: "Spierpijn", f: ["Vetten", "Eiwitten", "Water"]}, 
+        {t: "Vocht vasthouden", f: ["Vezels", "Water"]},
+        {t: "Angst / Paniek", f: ["Stress", "Vezels", "Eiwitten", "Water"]}, 
+        {t: "Brandend maagzuur", f: ["Vezels", "Eiwitten", "Water"]},
+        {t: "Stoelgang problemen", f: ["Vezels", "Vetten", "Water"]}, 
+        {t: "Concentratieverlies", f: ["Stress", "Vetten", "Eiwitten", "Water"]},
+        {t: "Vergeetachtigheid", f: ["Stress", "Vetten", "Eiwitten", "Water"]}, 
+        {t: "Onzeker zijn", f: ["Vezels", "Vetten", "Water"]},
+        {t: "Minder aankunnen", f: ["Vezels", "Vetten", "Eiwitten", "Water"]}, 
+        {t: "Negatieve gedachten", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]},
+        {t: "Snel geïrriteerd", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]}, 
+        {t: "Zin in zoet", f: ["Stress", "Vezels", "Eiwitten", "Water"]},
+        {t: "Ontstekingen", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]}, 
+        {t: "Gewrichtspijn", f: ["Stress", "Vezels", "Vetten", "Eiwitten", "Water"]},
+        {t: "Hartkloppingen", f: ["Stress", "Vetten", "Eiwitten", "Water"]}, 
+        {t: "Droge huid / Acné", f: ["Stress", "Vetten", "Eiwitten", "Water"]},
+        {t: "Trage wondgenezing", f: ["Stress", "Vezels"]}, 
+        {t: "Haarverlies", f: ["Vezels"]},
+        {t: "Wazig zicht", f: ["Stress", "Vezels", "Vetten", "Water"]}, 
+        {t: "Broze nagels", f: ["Vezels"]},
+        {t: "Schimmelinfectie", f: ["Stress", "Vezels", "Water"]}, 
+        {t: "Allergieën", f: ["Vezels"]},
+        {t: "Bloedend tandvlees", f: ["Eiwitten"]}, 
+        {t: "Koortsblaasjes", f: ["Weerstand"]},
+        {t: "Veel dorst/plassen", f: ["Stress", "Vezels", "Eiwitten"]}, 
+        {t: "Slechte slaper", f: ["Stress", "Vezels", "Water"]}
     ];
 
     function init() {
