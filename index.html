@@ -12,7 +12,7 @@
         /* --- Sidebar --- */
         #sidebar { width: 280px; background: var(--sidebar-dark); color: white; padding: 30px 20px; position: fixed; right: 0; height: 100vh; overflow-y: auto; z-index: 100; box-shadow: -5px 0 15px rgba(0,0,0,0.1); box-sizing: border-box; }
         #sidebar h3 { border-bottom: 2px solid var(--hb-green); padding-bottom: 10px; margin-bottom: 20px; }
-        .info-btn { width: 100%; padding: 12px; margin-bottom: 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; cursor: pointer; text-align: left; font-family: inherit; transition: 0.3s;}
+        .info-btn { width: 100%; padding: 12px; margin-bottom: 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; cursor: pointer; text-align: left; font-family: inherit; transition: 0.3s; font-size: 0.85rem;}
         .info-btn:hover { background: rgba(255,255,255,0.2); border-color: var(--hb-green); }
         
         /* --- Main Content --- */
@@ -44,6 +44,9 @@
         .analysis-box { padding: 15px; border-radius: 10px; background: #fdfdfd; border: 1px solid #eee; font-size: 0.85rem; }
         .highlight-box { border-left: 5px solid var(--hb-green); background: #f4f9f0; }
         .warning-box { margin-top: 15px; padding: 10px; background: #ffeaea; border-left: 4px solid #e74c3c; color: #c0392b; font-size: 0.8rem; border-radius: 5px;}
+        
+        /* Allergie box */
+        #allergy-box { display: none; margin-top: 15px; padding: 15px; background: #fff3cd; border-left: 4px solid #f1c40f; border-radius: 5px; }
 
         /* Mobiele optimalisatie */
         @media (max-width: 768px) {
@@ -99,6 +102,20 @@
     </div>
 
     <div class="card">
+        <h2>2b. Lichaamsanalyse (Tanita)</h2>
+        <div class="form-grid">
+            <div class="form-group"><label>Gewicht (kg)</label><input type="text"></div>
+            <div class="form-group"><label>Vetpercentage (%)</label><input type="text"></div>
+            <div class="form-group"><label>Spiermassa (kg)</label><input type="text"></div>
+            <div class="form-group"><label>Visceraal vet</label><input type="text"></div>
+            <div class="form-group"><label>Lichaamsbouw-score</label><input type="text"></div>
+            <div class="form-group"><label>Basale stofwisseling (Kcal)</label><input type="text"></div>
+            <div class="form-group"><label>Metabolische leeftijd</label><input type="text"></div>
+            <div class="form-group"><label>Lichaamswater (%)</label><input type="text"></div>
+        </div>
+    </div>
+
+    <div class="card">
         <h2>3. Checklist Huidige Levensstijl</h2>
         <table class="check-table">
             <thead><tr><th align="left" style="color:#888; font-size:0.8rem;">Vraagstelling</th><th class="col-option">NEE</th><th class="col-option">JA</th></tr></thead>
@@ -125,6 +142,14 @@
     <div class="card">
         <h2>5. Analyse Voedingstekorten</h2>
         <div class="symp-grid" id="symp-list"></div>
+        
+        <div id="allergy-box">
+            <div class="form-group">
+                <label style="color: #856404;">Welke allergieën of intoleranties?</label>
+                <input type="text" placeholder="Bijv. lactose, gluten, noten, fruit..." style="border: 1px solid #ffeeba;">
+            </div>
+        </div>
+
         <div class="analysis-container">
             <div class="analysis-box">
                 <strong style="color:var(--hb-green)">Symptoom & Vermoedelijk tekort:</strong>
@@ -156,10 +181,15 @@
     <button class="info-btn" onclick="window.open('Visceraal-vet.pdf')">Visceraal vet</button>
     <button class="info-btn" onclick="window.open('Vetpercentage.pdf')">Vetpercentage</button>
     <button class="info-btn" onclick="window.open('centimeters.pdf')">Centimeters of kilo's</button>
+    <button class="info-btn" onclick="window.open('vet-vs-spier.jpg')">Vet vs Spier (Foto)</button>
     <button class="info-btn" onclick="window.open('Gewrichten.pdf')">Gewrichten</button>
     <button class="info-btn" onclick="window.open('Suikerspiegel.pdf')">Suikerspiegel</button>
+    <button class="info-btn" onclick="window.open('waarom-ontbijten.jpg')">Waarom ontbijten? (Foto)</button>
+    <button class="info-btn" onclick="window.open('Water-lichaam.jpg')">Water in je lichaam (Foto)</button>
+    <button class="info-btn" onclick="window.open('Hydratie.jpg')">Hydratatie Status (Foto)</button>
     <button class="info-btn" onclick="window.open('Gezonde-tussendoortjes.pdf')">Gezonde tussendoortjes</button>
     <button class="info-btn" onclick="window.open('Spijsvertering.pdf')">Spijsvertering</button>
+    <button class="info-btn" onclick="window.open('Bouwstenen-vergelijking.jpg')">Bouwstenen (Foto)</button>
     <button class="info-btn" onclick="window.open('Eiwit-vergelijking.pdf')">Bouwstenen (Huis)</button>
     <button class="info-btn" onclick="window.open('Ons-brein.pdf')">Ons brein</button>
     <button class="info-btn" onclick="window.open('Ontbijtopties.jpg')">Ontbijtopties</button>
@@ -223,11 +253,24 @@
     function updateAnalysis() {
         const checked = document.querySelectorAll('.sc:checked');
         let tallies = {}; let names = [];
+        let hasAllergy = false;
+
         checked.forEach(c => {
+            const sympName = c.getAttribute('data-name');
             const sympTags = c.getAttribute('data-tags').split(',');
-            names.push(`&bull; ${c.getAttribute('data-name')} <span style="color:#888; font-size:0.75rem;">(${sympTags.join(', ')})</span>`);
+            
+            names.push(`&bull; ${sympName} <span style="color:#888; font-size:0.75rem;">(${sympTags.join(', ')})</span>`);
             sympTags.forEach(t => tallies[t] = (tallies[t]||0)+1);
+            
+            // Controleer of "Allergieën" is aangevinkt
+            if (sympName === "Allergieën") {
+                hasAllergy = true;
+            }
         });
+
+        // Toon of verberg het allergievakje op basis van de check
+        document.getElementById('allergy-box').style.display = hasAllergy ? 'block' : 'none';
+
         document.getElementById('symp-details').innerHTML = names.join('<br>') || "Klik op symptomen...";
         const sorted = Object.entries(tallies).sort((a,b) => b[1]-a[1]);
         let resHTML = sorted.map(r => `<div style="padding:2px 0;">${r[0]}: ${r[1]}x</div>`).join('') || "...";
